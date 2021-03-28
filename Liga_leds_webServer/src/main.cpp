@@ -4,7 +4,7 @@
 
 
 #define LEDVERDE D0
-#define LEDAZUL D1
+#define LEDAZUL D2
 
 ESP8266WebServer server;
 
