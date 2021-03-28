@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LED controller</title>
+
+    <style>
+    body { 
+    font-family: Helvetica; 
+    display: inline-block; 
+    margin: 0px auto; 
+    text-align: center;
+    }
+    .button { 
+    background-color: #195B6A; 
+    border: none; 
+    color: white; 
+    padding: 16px 40px;
+    text-decoration: none; 
+    font-size: 30px; 
+    margin: 2px; 
+    cursor: pointer;
+    }
+    .off {
+    background-color: #77878A
+    }
+    </style>
+</head>
+<body>
+    <h1>ESP8266 Web Server</h1>
+    <p>GPIO 5</p>
+     <p><button id = "gpio1", class="button off">OFF</button></p>
+     <p>GPIO 4</p>
+    <p><button id = "gpio2" class="button off">OFF</button></p>
+    <script>
+
+        btn1 = document.getElementById("gpio1");
+        btn2 = document.getElementById("gpio2");
+
+        btn1.addEventListener("click", function(){
+            let rqs = new XMLHttpRequest();
+            let url;
+            btn1.classList.toggle("off");
+            if (btn1.innerText == "ON"){
+              url = "/desliga1";
+                btn1.innerText = "OFF";
+           }
+           else{
+               btn1.innerText = "ON";
+              url =  "\liga1";
+           }    
+             rqs.open("POST", url, true);
+            rqs.send();
+        });
+          
+        btn2.addEventListener("click", function(){
+          let rqs = new XMLHttpRequest();
+            let url;
+            btn2.classList.toggle("off");
+            if (btn2.innerText == "ON"){
+              url = "/desliga2";
+                btn2.innerText = "OFF";
+           }
+           else{
+               btn2.innerText = "ON";
+              url =  "\liga2";
+           }    
+             rqs.open("POST", url, true);
+            rqs.send();
+        });
+    </script>
+</body>
+</html>
