@@ -3,76 +3,57 @@
 #include "webPage.h"
 
 
+#define LEDVERDE D0
+#define LEDAZUL D1
+
 ESP8266WebServer server;
-uint8_t pin_led = D0;
-uint8_t pin_led2 = D2;
+
 const char* ssid     = "Seu_Wifi";
 const char* password = "Sua_Senha";
 
-
-void liga1()
+//Funções dos requests
+void verdeOn()
 {
-  digitalWrite(pin_led,HIGH);
+  digitalWrite(LEDVERDE,HIGH);
 }
 
-void desliga1()
+void verdeOff()
 {
-  digitalWrite(pin_led,LOW);
+  digitalWrite(LEDVERDE,LOW);
 }
 
-void liga2()
+void azulOn()
 {
-  digitalWrite(pin_led2,HIGH);
+  digitalWrite(LEDAZUL,HIGH);
 }
 
-void desliga2()
+void azulOff()
 {
-  digitalWrite(pin_led2,LOW);
+  digitalWrite(LEDAZUL,LOW);
 }
-
-char webpage[] PROGMEM = R"=====(
-<html>
-<head>
-</head>
-<body>
-<p> LED Status: <span id="led-state">__</span> </p>
-<button onclick="myFunction()"> TOGGLE </button>
-</body>
-<script>
-function myFunction()
-{
-  console.log("button was clicked!");
-  var xhr = new XMLHttpRequest();
-  var url = "/liga";
-  
-  xhr.open("POST", url, true);
-  xhr.send();
-};
-document.addEventListener('DOMContentLoaded', myFunction, false);
-</script>
-</html>
-)=====";
 
 void setup()
 {
-  pinMode(pin_led, OUTPUT);
-  pinMode(pin_led2, OUTPUT);
+  pinMode(LEDVERDE, OUTPUT);
+  pinMode(LEDAZUL, OUTPUT);
+
   WiFi.begin(ssid,password);
   Serial.begin(115200);
-  while(WiFi.status()!=WL_CONNECTED)
+
+  while(WiFi.status()!=WL_CONNECTED)//Enquanto a conexão não é realizada
   {
     Serial.print(".");
     delay(500);
   }
-  Serial.println("");
+
   Serial.print("IP Address: ");
   Serial.println(WiFi.localIP());
 
-  
-  server.on("/liga1",liga1);
-  server.on("/desliga1",desliga1);
-  server.on("/liga2",liga2);
-  server.on("/desliga2",desliga2);
+  //Definições das ações a serem tomadas quando as requisiões forem feitas.
+  server.on("/liga1",azulOn);
+  server.on("/desliga1",azulOff);
+  server.on("/liga2",verdeOn);
+  server.on("/desliga2",verdeOff);
   server.begin();
 }
 

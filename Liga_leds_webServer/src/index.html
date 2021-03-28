@@ -9,67 +9,77 @@
     <style>
     body { 
     font-family: Helvetica; 
-    display: inline-block; 
+    display: flex; 
+    flex-direction: column;
     margin: 0px auto; 
     text-align: center;
     }
     .button { 
-    background-color: #195B6A; 
     border: none; 
     color: white; 
     padding: 16px 40px;
     text-decoration: none; 
+    border-radius: 10px;
     font-size: 30px; 
     margin: 2px; 
-    cursor: pointer;
+    }
+    .azul{
+      background-color: #0096c7;
+      border: none; 
+    }
+    .verde {
+      background-color: #2a9d8f;
+      border: none; 
     }
     .off {
-    background-color: #77878A
+    background-color: #77878A;
+    border: none; 
     }
     </style>
 </head>
 <body>
-    <h1>ESP8266 Web Server</h1>
-    <p>GPIO 5</p>
-     <p><button id = "gpio1", class="button off">OFF</button></p>
-     <p>GPIO 4</p>
-    <p><button id = "gpio2" class="button off">OFF</button></p>
-    <script>
+    <h1>ESP8266 LED Server</h1>
+    <div class = "botoes">
+    <p>LED AZUL</p>
+     <p><button id = "gpio1", class="button off azul">OFF</button></p>
+     <p>LED VERDE</p>
+    <p><button id = "gpio2" class="button off verde">OFF</button></p>
+  </div>
+  <script>
+    btn1 = document.getElementById("gpio1");
+    btn2 = document.getElementById("gpio2");
 
-        btn1 = document.getElementById("gpio1");
-        btn2 = document.getElementById("gpio2");
-
-        btn1.addEventListener("click", function(){
-            let rqs = new XMLHttpRequest();
-            let url;
-            btn1.classList.toggle("off");
-            if (btn1.innerText == "ON"){
-              url = "/desliga1";
-                btn1.innerText = "OFF";
-           }
-           else{
-               btn1.innerText = "ON";
-              url =  "\liga1";
-           }    
-             rqs.open("POST", url, true);
-            rqs.send();
-        });
+    btn1.addEventListener("click", function(){
+      let rqs = new XMLHttpRequest();
+      let url;
+      btn1.classList.toggle("off");
+      if (btn1.innerText == "ON"){
+        url = "/desliga1";
+        btn1.innerText = "OFF";
+      }
+      else{
+        btn1.innerText = "ON";
+        url =  "\liga1";
+      }    
+      rqs.open("POST", url, true);
+      rqs.send();
+    });
           
-        btn2.addEventListener("click", function(){
-          let rqs = new XMLHttpRequest();
-            let url;
-            btn2.classList.toggle("off");
-            if (btn2.innerText == "ON"){
-              url = "/desliga2";
-                btn2.innerText = "OFF";
-           }
-           else{
-               btn2.innerText = "ON";
-              url =  "\liga2";
-           }    
-             rqs.open("POST", url, true);
-            rqs.send();
-        });
-    </script>
+    btn2.addEventListener("click", function(){
+      let rqs = new XMLHttpRequest();
+      let url;
+      btn2.classList.toggle("off");
+      if (btn2.innerText == "ON"){
+        url = "/desliga2";
+        btn2.innerText = "OFF";
+      }
+      else{
+        btn2.innerText = "ON";
+        url =  "\liga2";
+      }    
+      rqs.open("POST", url, true);
+      rqs.send();
+    });
+  </script>
 </body>
 </html>
