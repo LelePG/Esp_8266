@@ -1,4 +1,4 @@
-char pageCode[] PROGMEM = R"=====(
+char tiaraCodigo[] PROGMEM = R"=====(
     <!DOCTYPE html>
 <html lang="en">
 <head>

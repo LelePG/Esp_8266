@@ -6,8 +6,10 @@
 #define GREEN D1
 #define BLUE D2
 
-#define SSID "Seu_SSID"
-#define SENHA "SUA_SENHA"
+#define SSID "seu_Wifi"
+#define SENHA "sua_Senha"
+
+ESP8266WebServer servidor;
 
 void coloreLED(int redQ, int greenQ, int blueQ) {
   analogWrite(RED, redQ);
@@ -44,20 +46,22 @@ while(WiFi.status()!=WL_CONNECTED)//Enquanto a conexão não é realizada
 Serial.print("IP Address: ");
 Serial.println(WiFi.localIP());//Ip onde tenho que me conectar
 
-server.on("/azul",azul);
-server.on("/aqua",aqua);
-server.on("/VP",vprimavera);
-server.on("/Verde",verde);
-server.on("/lilas",lilas);
-server.on("/blue-violet",azulVioleta);
-server.on("/magenta",magenta);
-server.on("/rosa",rosa);
-server.on("/vermelho",vermelho);
-server.on("/branco",branco);
-server.begin();
+servidor.on("/azul",azul);
+servidor.on("/aqua",aqua);
+servidor.on("/VP",vprimavera);
+servidor.on("/Verde",verde);
+servidor.on("/lilas",lilas);
+servidor.on("/blue-violet",azulVioleta);
+servidor.on("/magenta",magenta);
+servidor.on("/Rosa",rosa);
+servidor.on("/red",vermelho);
+servidor.on("/branco",branco);
+servidor.begin();
+}
 
 void loop() {
-  server.send(200,"text/html", tiaraCodigo);//Imprime a página web no servidor
-  server.handleClient();  
+  coloreLED(16,176,200);
+  servidor.send(200,"text/html", tiaraCodigo);//Imprime a página web no servidor
+  servidor.handleClient();  
 
 }
