@@ -2,15 +2,13 @@
 #include <ESP8266WiFi.h>
 #include<ESP8266WebServer.h>
 #include "paginaWeb.h"
-#include "wifi.h"//Apagar esta linha, serve para guardar a senha do wifi durante o desenvolvimento
 
-#define RED D0
-#define GREEN D1
-#define BLUE D2
+#define RED D5
+#define GREEN D6
+#define BLUE D7
 
-//Descomente esta linha
-/*#define SSID "seu_Wifi"
-#define SENHA "sua_Senha"*/
+#define SSID "seu_Wifi"
+#define SENHA "sua_Senha"
 
 ESP8266WebServer servidor;
 
@@ -20,7 +18,6 @@ void coloreLED(int redQ, int greenQ, int blueQ) {
   analogWrite(BLUE, blueQ);
 }
 
-
 void acendeLED(void){
   coloreLED(255,255,255);  
 }
@@ -29,13 +26,8 @@ void apagaLED(void){
   coloreLED(0,0,0);
 }
 
-
-
-
-
 void handleCor()
 {
-
   if (servidor.hasArg("cor"))
   {
     String corHexa = servidor.arg("cor");
@@ -47,9 +39,7 @@ void handleCor()
     coloreLED(r.toInt(),g.toInt(),b.toInt());
     //Serial.println(r + ' ' + g + ' ' + b);
   }
-  
 }
-
 
 void setup() {
  pinMode(RED,OUTPUT);
@@ -73,7 +63,6 @@ servidor.on("/desliga", apagaLED);
 servidor.on("/cor", HTTP_GET, handleCor);
 
 servidor.begin();
-
 }
 
 void loop() {
