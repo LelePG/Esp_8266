@@ -39,13 +39,23 @@
         const fazRequisicao = function(url){
             console.log(url);
             let request = new XMLHttpRequest();
-            request.open("POST", url, true);
+            request.open("GET", url, true);
             request.send();
         }
 
         document.getElementById("liga").addEventListener("click", function(){fazRequisicao("/liga");});
         document.getElementById("desliga").addEventListener("click", function(){fazRequisicao("/desliga");});
-        document.getElementById("cor").addEventListener("mouseleave", function(){fazRequisicao(`/cor/${cor.value}`);} )
+        document.getElementById("cor").addEventListener("mouseleave", function(){
+            
+            let corHexa = cor.value.toString().substring(1);// tira o #
+            //manipulação das cores
+            let r = parseInt(corHexa.substring(0,2),16);
+            let g = parseInt(corHexa.substring(2,4),16);
+            let b = parseInt(corHexa.substring(4,6),16);
+
+            fazRequisicao(`/cor?cor=(${r}, ${g}, ${b})`);
+        
+        });
 
     </script>
 </body>

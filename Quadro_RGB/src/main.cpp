@@ -2,13 +2,14 @@
 #include <ESP8266WiFi.h>
 #include<ESP8266WebServer.h>
 #include "paginaWeb.h"
+#include "wifi.h"
 
 #define RED D0
 #define GREEN D1
 #define BLUE D2
 
-#define SSID "seu_Wifi"
-#define SENHA "sua_Senha"
+/*#define SSID "seu_Wifi"
+#define SENHA "sua_Senha"*/
 
 ESP8266WebServer servidor;
 
@@ -26,6 +27,28 @@ void acendeLED(void){
 void apagaLED(void){
   coloreLED(0,0,0);
 }
+
+
+
+
+
+void handleCor()
+{
+
+  if (servidor.hasArg("cor"))
+  {
+    String corHexa = servidor.arg("cor");
+    String r = corHexa.substring(1,corHexa.indexOf(','));
+    corHexa = corHexa.substring(corHexa.indexOf(',')+1);
+    String g = corHexa.substring(0,corHexa.indexOf(','));
+    corHexa = corHexa.substring(corHexa.indexOf(',')+1);
+    String b = corHexa.substring(0,corHexa.length()-1);
+    coloreLED(r.toInt(),g.toInt(),b.toInt());
+    //Serial.println(r + ' ' + g + ' ' + b);
+  }
+  
+}
+
 
 void setup() {
  pinMode(RED,OUTPUT);
@@ -45,14 +68,15 @@ Serial.print("IP Address: ");
 Serial.println(WiFi.localIP());//Ip onde tenho que me conectar
 
 servidor.on("/liga",acendeLED);
-servidor.on('/desliga', apagaLED);
+servidor.on("/desliga", apagaLED);
+servidor.on("/cor", HTTP_GET, handleCor);
 
 servidor.begin();
+
 }
 
 void loop() {
-  coloreLED(16,176,200);
-  servidor.send(200,"text/html", codigoRGB);//Imprime a página web no servidor
+  servidor.send(200,"text/html", codigoRGB);
   servidor.handleClient();  
 
 }
