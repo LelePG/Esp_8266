@@ -2,12 +2,13 @@
 #include <ESP8266WiFi.h>
 #include<ESP8266WebServer.h>
 #include "paginaWeb.h"
-#include "wifi.h"
+#include "wifi.h"//Apagar esta linha, serve para guardar a senha do wifi durante o desenvolvimento
 
 #define RED D0
 #define GREEN D1
 #define BLUE D2
 
+//Descomente esta linha
 /*#define SSID "seu_Wifi"
 #define SENHA "sua_Senha"*/
 
