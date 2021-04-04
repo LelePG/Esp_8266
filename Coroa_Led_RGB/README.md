@@ -1,4 +1,5 @@
-# Liga-LEDs WebServer
+# Coroa_Led_RGB
+
 <img src = "imagens_e_videos/coroa3.jpeg" width = 300>
 <img src = "imagens_e_videos/coroa_ligada.jpeg" width = 300>
 
@@ -20,4 +21,4 @@ O projeto é composto de uma página web desenvolvida de maneira independente no
 Quando um dos botões das cores é apertado, o código javascript faz uma requisição ao servidor (no caso o ESP), que ao receber esta requisição toma uma determinada ação de acordo com a requisição passada (acender/apagar um dos LEDs).
 
 ## Sobre a replicação do projeto:
-Se você tem interesse em utilizar o código para alguma coisa, não precisa necessáriamente fabricar a sua coroa (a menos que você queira, é claro). O código inteiro trata de acender um único LED com os botões coloridos da página web. Como os LEDs estão ligados em paralelo, desde que você tenha um LED RGB já consegue utilizar o código.
+Se você tem interesse em utilizar o código para alguma coisa, não precisa necessáriamente fabricar a sua coroa (a menos que você queira, é claro). O código inteiro trata de acender um único LED com os botões coloridos da página web. Como os LEDs estão ligados em paralelo, desde que você tenha um LED RGB já consegue utilizar o código. Se você quiser, também pode utilizar o código presente no projeto Quadro_RGB, que nada mais é do que uma versão sofisticada deste projeto.
