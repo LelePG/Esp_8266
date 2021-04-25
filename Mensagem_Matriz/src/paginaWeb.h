@@ -53,13 +53,7 @@ char codigoWeb[] PROGMEM = R"=====(
         const fazRequisicao = function(mensagem){
             //console.log(mensagem);
             let request = new XMLHttpRequest();
-            let url;
-            if(!mensagem){
-                url = "x01";
-            }
-            else{
-                url = `/mensagem?m=${mensagem}`;       
-            }
+            let url =`/mensagem?m=${mensagem}`;       
             request.open("GET", url, true);
             request.send();
         }
@@ -68,8 +62,10 @@ char codigoWeb[] PROGMEM = R"=====(
         const texto = document.getElementById("texto");
 
         botao.addEventListener("click",function(){ 
-            fazRequisicao(texto.value);
-            texto.value = "";
+            if(texto.value){
+                fazRequisicao(texto.value);
+                texto.value = "";
+            }
         });
     </script>
 </body>
