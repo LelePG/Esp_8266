@@ -4,15 +4,14 @@
 #include <FC16.h>
 
 #include "paginaWeb.h"
-#include "wifi.h"
 
 #define pinoCS D4
 #define qtDisplays 4
 #define scrollDelay 250
 #define buzzer D2
 
-//#define SSID "seu_Wifi"
-//#define SENHA "sua_Senha"
+#define SSID "seu_Wifi"
+#define SENHA "sua_Senha"
 
 ESP8266WebServer servidor;
 
