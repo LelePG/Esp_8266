@@ -1,70 +1,54 @@
 #include <Arduino.h>
+#include <ESP8266WiFi.h>
+#include <ESP8266WebServer.h>
+#include <FC16.h>
 
-/*#include "MD_MAX72xx.h"
-#include "MD_Parola.h"
-#include <SPI.h>
+#include "paginaWeb.h"
+#include "wifi.h"
 
+#define pinoCS D4
+#define qtDisplays 4
+#define scrollDelay 250
 
-#define HARDWARE_TYPE MD_MAX72XX::FC16_HW
-#define MAX_DEVICES 4
-#define CS_PIN 2
+//#define SSID "seu_Wifi"
+//#define SENHA "sua_Senha"
 
-#define DATA_PIN 3
-#define CLK_PIN 4
-//MD_Parola myDisplay = MD_Parola(HARDWARE_TYPE, DATA_PIN, CLK_PIN, CS_PIN, MAX_DEVICES);
+ESP8266WebServer servidor;
 
-MD_Parola myDisplay = MD_Parola(HARDWARE_TYPE, CS_PIN, MAX_DEVICES);
+FC16 matriz = FC16(pinoCS, qtDisplays);
+
+void imprimeMensagem (void){
+  if (servidor.hasArg("m")){
+      matriz.clearDisplay();
+      const char * mensagem = servidor.arg("m").c_str();//servidor.arg() retorna uma string e c_str transforma em array de char
+      matriz.setText(mensagem);
+  }
+}
 
 void setup() {
-  // Intialize the object:
-  myDisplay.begin();
-  // Set the intensity (brightness) of the display (0-15):
-  myDisplay.setIntensity(0);
-  // Clear the display:
-  myDisplay.displayClear();
-}
-void loop() {
-  myDisplay.setTextAlignment(PA_CENTER);
-  myDisplay.print("Center");
-  delay(2000);
-  myDisplay.setTextAlignment(PA_LEFT);
-  myDisplay.print("Left");
-  delay(2000);
-  myDisplay.setTextAlignment(PA_RIGHT);
-  myDisplay.print("Right");
-  delay(2000);
-  myDisplay.setTextAlignment(PA_CENTER);
-  myDisplay.setInvert(true);
-  myDisplay.print("Invert");
-  delay(2000);
-  myDisplay.setInvert(false);
-  myDisplay.print(1234);
-  delay(2000);
-}*/
+  WiFi.begin(SSID,SENHA);
+  Serial.begin(115200);
 
-#include <FC16.h>
-//Conexao do pino CS
-const int csPin = D4;
-//Numero de displays que estamos usando
-const int numDisp = 4;
-//Tempo do scroll em milisegundos
-const int scrollDelay = 250;
-FC16 display = FC16(csPin, numDisp);
-void setup() 
-{
-  //Inicializa o display
- display.begin();
-  //Intensidade / Brilho
- display.setIntensity(8);
-  //Apaga o display
- display.clearDisplay();
- //Texto a ser exibido no display
- display.setText("x10 Hello!! x11");
+  while(WiFi.status()!=WL_CONNECTED){//Enquanto a conexão não é realizada
+    Serial.print(".");
+    delay(500);
+  }
+
+  Serial.print("IP Address: ");
+  Serial.println(WiFi.localIP());//Ip onde tenho que me conectar
+
+  matriz.begin();
+  matriz.setIntensity(8);
+  matriz.clearDisplay();
+
+  servidor.on("/mensagem", HTTP_GET, imprimeMensagem);
+  servidor.begin();
 }
-void loop() 
-{
- //Chama a rotina de scroll
- display.update();
- //Aguarda o tempo definido
- delay(scrollDelay);
+
+void loop() {
+  servidor.send(200,"text/html", codigoWeb);
+  servidor.handleClient();  
+  matriz.update();
+  delay(scrollDelay);
+
 }
