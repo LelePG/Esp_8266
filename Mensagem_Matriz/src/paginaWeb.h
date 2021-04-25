@@ -1,5 +1,5 @@
 char codigoWeb[] PROGMEM = R"=====(
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,11 @@ char codigoWeb[] PROGMEM = R"=====(
 
         }
         h1{
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: white;
+            margin-bottom: 3px;
+        }
+        p{
+            font-size: large;
             color: white;
         }
         div{
@@ -40,6 +44,7 @@ char codigoWeb[] PROGMEM = R"=====(
 </head>
 <body>
     <h1>Mande uma mensagem para a Lelê:</h1>
+    <p>Obs: Sem caracteres especiais porque o display não suporta</p>
     <div>
         <input type="text" id="texto">
         <input type = "button" id="btn" value="Enviar">
@@ -48,7 +53,13 @@ char codigoWeb[] PROGMEM = R"=====(
         const fazRequisicao = function(mensagem){
             //console.log(mensagem);
             let request = new XMLHttpRequest();
-            let url = `/mensagem?m=${mensagem}`;       
+            let url;
+            if(!mensagem){
+                url = "x01";
+            }
+            else{
+                url = `/mensagem?m=${mensagem}`;       
+            }
             request.open("GET", url, true);
             request.send();
         }

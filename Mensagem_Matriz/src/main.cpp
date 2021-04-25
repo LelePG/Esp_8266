@@ -9,6 +9,7 @@
 #define pinoCS D4
 #define qtDisplays 4
 #define scrollDelay 250
+#define buzzer D2
 
 //#define SSID "seu_Wifi"
 //#define SENHA "sua_Senha"
@@ -23,9 +24,14 @@ void imprimeMensagem (void){
       const char * mensagem = servidor.arg("m").c_str();//servidor.arg() retorna uma string e c_str transforma em array de char
       matriz.setText(mensagem);
   }
+  tone(buzzer,1300);
+  delay(1500);
+  noTone(buzzer);
 }
 
 void setup() {
+  pinMode(buzzer,OUTPUT);
+
   WiFi.begin(SSID,SENHA);
   Serial.begin(115200);
 
