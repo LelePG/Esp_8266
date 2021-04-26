@@ -6,7 +6,7 @@
 Este projeto se trata de um quadro montado com papelão com uma luz de fundo que contém LEDs RGB. O quadro é conectado em um servidor montado com ESP8266 que armazena uma página web que pode ser acessada de outros dispositivos na rede. Nesta página, existe um seletor de cores onde o usuário pode selecionar qualquer cor do espectro RGB e dois botões para ligar e desligar os LEDs. O botão de ligar inicia os LEDs com a cor branca e o de desligar desliga todos os LEDs.  
 
 ## Veja o projeto funcionando:
-Acesse a pasta *imagens* para ver mais sobre o projeto, ou ainda, confira o vídeo que eu fiz sobre ela no meu canal do youtube [clicando aqui](https://www.youtube.com/watch?v=WEMC6lVFhOA).
+Acesse a pasta *imagens* para ver mais sobre o projeto, ou ainda, confira o vídeo que eu fiz sobre ele no meu canal do youtube [clicando aqui](https://www.youtube.com/watch?v=WEMC6lVFhOA).
 
 ## Onde este projeto foi desenvolvido?
 Este projeto foi desenvolvido no plug-in [Platform.io](https://platformio.org/) da IDE Visual Studio Code. Ele também pode ser utilizado na IDE do Arduino, desde que algumas alterações sejam realizadas no arquivo main.cpp (que deve ser renomeado para um arquivo .ino). *OBS: caso você tente replicar este projeto no Platform.io e não consiga entender os valores impressos no monitor serial, certifique-se de que a cláusula `monitor_speed = 115200` está presente no arquivo `platformio.ini`.*

@@ -6,7 +6,7 @@
 Este projeto se trata de uma matriz de LEDs 8X32 (mais espeficamente o modelo [MAX7219](https://images.app.goo.gl/pwzDEVaormfdvxSK6)) onde mensagens são exibidas. Essas mensagens são enviadas através de requisições web feitas na página armazenada no ESP8266, onde existe um campo de texto onde a mensagem pode ser enviada. 
 
 ## Veja o projeto funcionando:
-Acesse a pasta *imagens* para ver mais sobre o projeto, ou ainda, confira o vídeo que eu fiz sobre ela no meu canal do youtube **Em breve**.
+Acesse a pasta *imagens* para ver mais sobre o projeto, ou ainda, confira o vídeo que eu fiz sobre ele no meu canal do youtube **Em breve**.
 
 ## Onde este projeto foi desenvolvido?
 Este projeto foi desenvolvido no plug-in [Platform.io](https://platformio.org/) da IDE Visual Studio Code. Ele também pode ser utilizado na IDE do Arduino, desde que algumas alterações sejam realizadas no arquivo main.cpp (que deve ser renomeado para um arquivo .ino). *OBS: caso você tente replicar este projeto no Platform.io e não consiga entender os valores impressos no monitor serial, certifique-se de que a cláusula `monitor_speed = 115200` está presente no arquivo `platformio.ini`.*
